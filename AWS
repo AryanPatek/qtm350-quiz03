@@ -1,0 +1,16 @@
+Part 2 AWS code: *have included code without adding any personal keys*
+
+ssh -i <key.pem> ubuntu@<public-ip>
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y python3 python3-pandas python3-matplotlib python3-numpy python3-seaborn
+scp -i <key.pem> aws/weather_analysis.py ubuntu@<public-ip>:~
+scp -i <key.pem> aws/weather_data.txt ubuntu@<public-ip>:~
+python3 weather_analysis.py
+cat /etc/os-release > os.txt
+scp -i <key.pem> ubuntu@<public-ip>:~/os.txt aws/
+scp -i <key.pem> ubuntu@<public-ip>:~/weather_analysis.png aws/
+cd aws
+git add weather_analysis.py weather_data.txt os.txt weather_analysis.png
+git commit -m "Added weather analysis results"
+git push origin main
+cd aws
